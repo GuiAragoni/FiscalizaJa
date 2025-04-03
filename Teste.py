@@ -1,44 +1,29 @@
-from flask import Flask
 import pandas as pd
-
-from db.database_config import DataBase
+from flask import Flask
+from services.cidadao_service import Cidadao
 
 app = Flask(__name__)
+cidadao_service = Cidadao()
 
 
-@app.route('/home')
-def index():
-    db = DataBase(f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER=Guiga\\SQLEXPRESS;DATABASE=FiscalizaJa;Trusted_Connection=yes;')
-    cursor = db.connect()
+
+@app.route('/cidadao', methods=['GET'])
+def obter_cidadao():
+    try:
     
-    print("\nExemplo 1: Lendo dados da tabela Ocorrencia")
-    cursor.execute("SELECT TOP 1 * FROM Ocorrencia")
-    rows = cursor.fetchall()
-    df = pd.DataFrame()
+        df = cidadao_service.obter_todos_os_dados()
+        df = df.drop(columns=['IdCidadao'], axis=1)
 
-    colunas = [
-        'IdOcorrencia',
-        'IdCidadao',
-        'IdSecretaria',
-        'IdTipoOcorrencia',
-        'Localizacao',
-        'Titulo',
-        'Descricao',
-        'Foto',
-        'Prioridade',
-        'Status',
-        'DataCriacao'
-    ]
-
-    # Criando o DataFrame
-    df = pd.DataFrame.from_records(rows, columns=colunas)
-    
-    # Retornar como JSON com caracteres acentuados corretamente
-    return app.response_class(
-        response=df.to_json(orient='records', force_ascii=False, date_format='iso'),
-        mimetype='application/json'
-    )
-
+        return app.response_class(
+            response=df.to_json(orient='records', force_ascii=False, date_format='iso'),
+            status=200,
+            mimetype='application/json'
+        )
+    except Exception as e:
+        return app.response_class(
+            response=str(e),
+            status=500
+        )
 
 
 if __name__ == '__main__':
