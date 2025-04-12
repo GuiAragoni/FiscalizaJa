@@ -3,8 +3,14 @@ import pandas as pd
 from datetime import datetime
 
 class DataBase:
-    def __init__(self, conn_str):
-        self.conn_str = conn_str
+    def __init__(self):
+        
+        #string fabricio
+        self.conn_str = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER=FIALHO\\SQLEXPRESS;DATABASE=FiscalizaJa;Trusted_Connection=yes;'
+        
+        #--------------------------
+        #string gui
+        #self.conn_str = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER=Guiga\\SQLEXPRESS;DATABASE=FiscalizaJa;Trusted_Connection=yes;'
 
     def connect(self):
         try:
