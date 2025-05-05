@@ -32,6 +32,10 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   h1 {
@@ -60,6 +64,7 @@
     padding: 1rem;
     box-sizing: inherit;
     position: relative;
+    flex: 1
   }
 
   .angular-logo {
