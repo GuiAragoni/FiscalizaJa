@@ -3,13 +3,14 @@
 }
 
 .register-wrapper {
-  height: 100vh;
+  height: 80vh;
   width: 100vw;
   background: linear-gradient(to bottom right, #01607c, #008080);
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Space Grotesk', sans-serif;
+  padding: 25px;
 }
 
 .register-card {
@@ -19,7 +20,7 @@
   width: 100%;
   max-width: 400px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);  
 }
 
 h2 {
@@ -105,14 +106,15 @@ form {
   }
 }
 
-.switch-login {
+.switch {
   font-size: 14px;
   margin-top: 15px;
+  
 
   a {
     color: #008080;
     font-weight: bold;
-    text-decoration: none;
+    text-decoration: none;    
   }
 }
 

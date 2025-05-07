@@ -1,4 +1,4 @@
-  :host {
+:host {
     --bright-blue: oklch(51.01% 0.274 263.83);
     --electric-violet: oklch(53.18% 0.28 296.97);
     --french-violet: oklch(47.66% 0.246 305.88);
@@ -32,10 +32,6 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
   }
 
   h1 {
