@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
+from main import app
 from services.ocorrencia_service import Ocorrencia
 
-app = Flask(__name__)
 ocorrencia_service = Ocorrencia()
 
 @app.route('/ocorrencia', methods=['GET'])
@@ -51,6 +51,3 @@ def deletar_ocorrencia(id):
         return jsonify({'mensagem': 'Ocorrência deletada com sucesso!'}), 200
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True)

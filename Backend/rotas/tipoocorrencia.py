@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
+from main import app
 from services.tipoocorrencia_service import TipoOcorrencia
 
 
-app = Flask(__name__)
 tipo_service = TipoOcorrencia()
 
 @app.route('/tipoocorrencia', methods=['GET'])
@@ -52,6 +52,3 @@ def deletar_tipo(id):
         return jsonify({'mensagem': 'Tipo de ocorrência deletado com sucesso!'}), 200
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True)

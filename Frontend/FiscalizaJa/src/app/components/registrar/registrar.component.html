@@ -3,7 +3,8 @@
     <h2>Crie sua conta</h2>   
 
     <form class="form">
-      <input type="text" placeholder="Nome completo" />
+      <input [(ngModel)]="nome" name="nome" required type="text" placeholder="Nome completo" />
+      <!-- <input type="text" placeholder="Nome completo" /> -->
       <input type="email" placeholder="Email" />
       <input type="password" placeholder="Senha" />
       <input type="password" placeholder="Confirme a senha" />

@@ -1,8 +1,9 @@
-import pandas as pd
-from flask import Flask, request, jsonify
+# cidadao_api.py
+from flask import request, jsonify
+from main import app
 from services.cidadao_service import Cidadao
 
-app = Flask(__name__)
+
 cidadao_service = Cidadao()
 
 @app.route('/cidadao', methods=['GET'])
@@ -29,7 +30,7 @@ def obter_cidadao_por_id(id):
         return jsonify({'erro': str(e)}), 500
     
 
-@app.route('/cidadao', methods=['POST'])
+@app.route('/registrar', methods=['POST'])
 def criar_cidadao():
     try:
         dados = request.json
@@ -56,6 +57,3 @@ def deletar_cidadao(id):
         return jsonify({'mensagem': 'Cidadão deletado com sucesso!'}), 200
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True)

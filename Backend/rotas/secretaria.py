@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify
+from main import app
 from services.secretaria_service import Secretaria
 
-app = Flask(__name__)
+
 secretaria_service = Secretaria()
 
 
@@ -53,5 +54,3 @@ def deletar_secretaria(id):
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True)
