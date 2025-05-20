@@ -1,15 +1,15 @@
-from flask import Flask, request, jsonify
-from main import app
+from flask import Blueprint, request, jsonify
 from services.tipoocorrencia_service import TipoOcorrencia
 
 
+tipo_ocorencia_bp = Blueprint('tipo_ocorencia', __name__)
 tipo_service = TipoOcorrencia()
 
-@app.route('/tipoocorrencia', methods=['GET'])
+@tipo_ocorencia_bp.route('/tipoocorrencia', methods=['GET'])
 def listar_tipos():
     try:
         df = tipo_service.obter_todos()
-        return app.response_class(
+        return tipo_ocorencia_bp.response_class(
             response=df.to_json(orient='records', force_ascii=False),
             status=200,
             mimetype='application/json'
@@ -17,7 +17,7 @@ def listar_tipos():
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-@app.route('/tipoocorrencia/<int:id>', methods=['GET'])
+@tipo_ocorencia_bp.route('/tipoocorrencia/<int:id>', methods=['GET'])
 def obter_tipo(id):
     try:
         df = tipo_service.obter_por_id(id)
@@ -27,7 +27,7 @@ def obter_tipo(id):
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-@app.route('/tipoocorrencia', methods=['POST'])
+@tipo_ocorencia_bp.route('/tipoocorrencia', methods=['POST'])
 def criar_tipo():
     try:
         dados = request.json
@@ -36,7 +36,7 @@ def criar_tipo():
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-@app.route('/tipoocorrencia/<int:id>', methods=['PUT'])
+@tipo_ocorencia_bp.route('/tipoocorrencia/<int:id>', methods=['PUT'])
 def atualizar_tipo(id):
     try:
         dados = request.json
@@ -45,7 +45,7 @@ def atualizar_tipo(id):
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-@app.route('/tipoocorrencia/<int:id>', methods=['DELETE'])
+@tipo_ocorencia_bp.route('/tipoocorrencia/<int:id>', methods=['DELETE'])
 def deletar_tipo(id):
     try:
         tipo_service.deletar(id)

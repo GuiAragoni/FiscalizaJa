@@ -1,16 +1,16 @@
-from flask import Flask, request, jsonify
-from main import app
+from flask import Blueprint, request, jsonify
 from services.secretaria_service import Secretaria
 
 
+secretaria_bp = Blueprint('secretaria', __name__)
 secretaria_service = Secretaria()
 
 
-@app.route('/secretaria', methods=['GET'])
+@secretaria_bp.route('/secretaria', methods=['GET'])
 def listar_secretarias():
     try:
         df = secretaria_service.obter_todos()
-        return app.response_class(
+        return secretaria_bp.response_class(
             response=df.to_json(orient='records', force_ascii=False),
             status=200,
             mimetype='application/json'
@@ -18,7 +18,7 @@ def listar_secretarias():
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-@app.route('/secretaria/<int:id>', methods=['GET'])
+@secretaria_bp.route('/secretaria/<int:id>', methods=['GET'])
 def obter_secretaria(id):
     try:
         df = secretaria_service.obter_por_id(id)
@@ -28,7 +28,7 @@ def obter_secretaria(id):
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-@app.route('/secretaria', methods=['POST'])
+@secretaria_bp.route('/secretaria', methods=['POST'])
 def criar_secretaria():
     try:
         dados = request.json
@@ -37,7 +37,7 @@ def criar_secretaria():
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-@app.route('/secretaria/<int:id>', methods=['PUT'])
+@secretaria_bp.route('/secretaria/<int:id>', methods=['PUT'])
 def atualizar_secretaria(id):
     try:
         dados = request.json
@@ -46,7 +46,7 @@ def atualizar_secretaria(id):
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-@app.route('/secretaria/<int:id>', methods=['DELETE'])
+@secretaria_bp.route('/secretaria/<int:id>', methods=['DELETE'])
 def deletar_secretaria(id):
     try:
         secretaria_service.deletar(id)
