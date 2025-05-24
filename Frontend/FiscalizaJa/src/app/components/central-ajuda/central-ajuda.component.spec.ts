@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FooterComponent } from './footer.component';
+import { CentralAjudaComponent } from './central-ajuda.component';
 
-describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
+describe('CentralAjudaComponent', () => {
+  let component: CentralAjudaComponent;
+  let fixture: ComponentFixture<CentralAjudaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FooterComponent]
+      imports: [CentralAjudaComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FooterComponent);
+    fixture = TestBed.createComponent(CentralAjudaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
