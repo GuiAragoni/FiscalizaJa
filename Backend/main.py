@@ -1,7 +1,18 @@
 # main.py
-from flask import Flask
-
+from flask import Flask, send_from_directory
+from flasgger import Swagger
 app = Flask(__name__)
+
+# Configuração do Flasgger
+app.config['SWAGGER'] = {
+    'title': 'FiscalizaJá API',
+    'version': '1.0',
+    'description': 'Documentação da API com Flasgger',
+    'uiversion': 3  
+}
+swagger = Swagger(app)
+
+
 
 from rotas.cidadao import cidadao_bp
 from rotas.ocorrencia import ocorrencia_bp

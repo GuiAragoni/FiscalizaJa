@@ -1,0 +1,187 @@
+swagger: "2.0"
+info:
+  title: "API Cidadão - FiscalizaJá"
+  description: "Documentação das rotas de CRUD para cidadãos"
+  version: "1.0.0"
+host: "localhost:4000"
+basePath: "/"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+paths:
+  /cidadao:
+    get:
+      tags:
+        - "Cidadão"
+      summary: "Lista todos os cidadãos"
+      description: "Retorna todos os cidadãos cadastrados em formato JSON"
+      responses:
+        200:
+          description: "Lista de cidadãos retornada com sucesso"
+          headers:
+            Content-location:
+              schema:
+                type: "string"
+                example: "#/definitions/Cidadao"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Cidadao"
+        500:
+          description: "Erro interno no servidor"
+          schema:
+            $ref: "#/definitions/Erro"
+
+  /cidadao/{id}:
+    get:
+      tags:
+        - "Cidadão"
+      summary: "Obtém um cidadão por ID"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+          description: "ID do cidadão"
+      responses:
+        200:
+          description: "Cidadão encontrado"
+          schema:
+            $ref: "#/definitions/Cidadao"
+        404:
+          description: "Cidadão não encontrado"
+          schema:
+            $ref: "#/definitions/Mensagem"
+        500:
+          description: "Erro interno no servidor"
+          schema:
+            $ref: "#/definitions/Erro"
+
+  /registrar:
+    post:
+      tags:
+        - "Cidadão"
+      summary: "Cria um novo cidadão"
+      description: "Cadastra um novo cidadão no sistema"
+      parameters:
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/CidadaoInput"
+      responses:
+        201:
+          description: "Cidadão criado com sucesso"
+          schema:
+            $ref: "#/definitions/Mensagem"
+        500:
+          description: "Erro interno no servidor"
+          schema:
+            $ref: "#/definitions/Erro"
+
+  /cidadao/{id}:
+    put:
+      tags:
+        - "Cidadão"
+      summary: "Atualiza um cidadão"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+          description: "ID do cidadão"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/CidadaoInput"
+      responses:
+        200:
+          description: "Cidadão atualizado com sucesso"
+          schema:
+            $ref: "#/definitions/Mensagem"
+        500:
+          description: "Erro interno no servidor"
+          schema:
+            $ref: "#/definitions/Erro"
+
+    delete:
+      tags:
+        - "Cidadão"
+      summary: "Remove um cidadão"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+          description: "ID do cidadão"
+      responses:
+        200:
+          description: "Cidadão removido com sucesso"
+          schema:
+            $ref: "#/definitions/Mensagem"
+        500:
+          description: "Erro interno no servidor"
+          schema:
+            $ref: "#/definitions/Erro"
+
+definitions:
+  Cidadao:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      nome:
+        type: "string"
+        example: "João da Silva"
+      cpf:
+        type: "string"
+        example: "123.456.789-00"
+      data_nascimento:
+        type: "string"
+        format: "date"
+        example: "1990-01-15"
+      endereco:
+        type: "string"
+        example: "Rua Exemplo, 123"
+
+  CidadaoInput:
+    type: "object"
+    required:
+      - "nome"
+      - "cpf"
+    properties:
+      nome:
+        type: "string"
+        example: "Maria Oliveira"
+      cpf:
+        type: "string"
+        example: "987.654.321-00"
+      data_nascimento:
+        type: "string"
+        format: "date"
+        example: "1985-05-20"
+      endereco:
+        type: "string"
+        example: "Avenida Teste, 456"
+
+  Mensagem:
+    type: "object"
+    properties:
+      mensagem:
+        type: "string"
+        example: "Operação realizada com sucesso"
+
+  Erro:
+    type: "object"
+    properties:
+      erro:
+        type: "string"
+        example: "Mensagem de erro detalhada"

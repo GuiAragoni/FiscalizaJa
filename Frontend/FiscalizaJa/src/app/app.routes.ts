@@ -7,6 +7,7 @@ import { CentralAjudaComponent } from './components/central-ajuda/central-ajuda.
 import { PoliticaPrivacidadeComponent } from './components/politica-privacidade/politica-privacidade.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'registrar', component: RegistrarComponent },
   { path: 'login', component: LoginComponent },  
