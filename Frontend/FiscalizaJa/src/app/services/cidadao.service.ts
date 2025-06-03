@@ -2,38 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface Cidadao {
-  IdCidadao?: number;
-  Nome: string;
-  Email: string;
-  Telefone: string;
-  CPF: string;
-  Endereco: string;
-}
 
-@Injectable({ providedIn: 'root' })
-export class CidadaoService {
-  private base = 'http://localhost:5000/cidadao';
+@Injectable({
+  providedIn: 'root'
+})
+export class CidadaoService { 
 
-  constructor(private http: HttpClient) {}
+  apiUrl = 'http://127.0.0.1:5000/';
 
-  listar(): Observable<Cidadao[]> {
-    return this.http.get<Cidadao[]>(`${this.base}`);
+  constructor(private http: HttpClient) { }
+                    
+  chamarEndpoint(): Observable<any> {
+    return this.http.get("http://127.0.0.1:5000/cidadao");
   }
 
-  obter(id: number): Observable<Cidadao> {
-    return this.http.get<Cidadao>(`${this.base}/${id}`);
+  registrarCidadao(dados: any): Observable<any> {      
+  return this.http.post(this.apiUrl + "registrar", dados);
   }
 
-  criar(dados: Cidadao): Observable<any> {
-    return this.http.post(this.base, dados);
-  }
-
-  atualizar(id: number, dados: Cidadao): Observable<any> {
-    return this.http.put(`${this.base}/${id}`, dados);
-  }
-
-  deletar(id: number): Observable<any> {
-    return this.http.delete(`${this.base}/${id}`);
+  loginCidadao(dados: any): Observable<any> {      
+  return this.http.get(this.apiUrl + "cidadao", dados);
   }
 }
+

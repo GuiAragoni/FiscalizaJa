@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CidadaoService } from '../../services/cidadao.service';
 
 @Component({
   selector: 'app-home',  
@@ -8,6 +9,8 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
+
+  constructor(private apiService: CidadaoService) {}
 
   private scrollHandler = () => {
     const footer = document.getElementById('footer');
@@ -19,7 +22,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     if (window.scrollY > maxScroll) {
       window.scrollTo({ top: maxScroll });
     }
-  };
+  };  
 
   ngAfterViewInit(): void {
     window.addEventListener('scroll', this.scrollHandler);
@@ -27,5 +30,12 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.scrollHandler);
+  }
+
+  chamarApi() {
+    debugger;
+    this.apiService.chamarEndpoint().subscribe(response => {
+        console.log('Resposta da API:', response);
+      });    
   }
 }

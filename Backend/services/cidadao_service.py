@@ -9,7 +9,7 @@ class Cidadao:
     def obter_todos_os_dados(self):
         self.cursor.execute("SELECT * FROM Cidadao")
         rows = self.cursor.fetchall()
-        colunas = ['IdCidadao', 'Nome', 'Email', 'Telefone', 'CPF', 'Endereco']
+        colunas = ['IdCidadao', 'Nome', 'Email', 'Senha', 'CPF', 'Telefone', 'Endereco']
         return pd.DataFrame.from_records(rows, columns=colunas)
 
     def obter_por_id(self, id):
@@ -25,12 +25,28 @@ class Cidadao:
         
         df = pd.DataFrame([json_data]) if json_data else pd.DataFrame()
         return df
+    
+    def obter_por_email(self, email):
+        self.cursor.execute("SELECT * FROM Cidadao WHERE Email = ?", email)
+        row = self.cursor.fetchone()
+        json_data = {
+            'Nome': row[1],
+            'Email': row[2],
+            'CPF': row[3],
+            'Telefone': row[4],
+            'Endereco': row[5]
+        } if row else None
+        
+        df = pd.DataFrame([json_data]) if json_data else pd.DataFrame()
+        return df
+    
+    
 
     def inserir(self, dados):
         self.cursor.execute("""
-            INSERT INTO Cidadao (Nome, Email, Telefone, CPF, Endereco)
-            VALUES (?, ?, ?, ?, ?)
-        """, (dados['Nome'], dados['Email'], dados['Telefone'], dados['CPF'], dados['Endereco']))
+            INSERT INTO Cidadao (Nome, Email, Senha)
+            VALUES (?, ?, ?)
+        """, (dados['Nome'], dados['Email'], dados['Senha']))
         self.cursor.commit()
 
     def atualizar(self, id, dados):

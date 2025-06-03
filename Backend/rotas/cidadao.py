@@ -33,6 +33,20 @@ def obter_cidadao_por_id(id):
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
     
+    
+
+@cidadao_bp.route('/cidadao/<string:email>', methods=['GET'])
+@swag_from('../static/swagger.yml')
+def obter_cidadao_por_email(email):
+    try:
+        df = cidadao_service.obter_por_email(email)
+        if df.empty:
+            return jsonify({'mensagem': 'Cidadão não encontrado'}), 404
+                
+        return jsonify(df.iloc[0].to_dict())
+    except Exception as e:
+        return jsonify({'erro': str(e)}), 500
+    
 
 @cidadao_bp.route('/registrar', methods=['POST'])
 @swag_from('../static/swagger.yml')
