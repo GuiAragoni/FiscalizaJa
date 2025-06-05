@@ -32,9 +32,10 @@ class Cidadao:
         json_data = {
             'Nome': row[1],
             'Email': row[2],
-            'CPF': row[3],
-            'Telefone': row[4],
-            'Endereco': row[5]
+            'Senha': row[3],
+            'CPF': row[4],
+            'Telefone': row[5],
+            'Endereco': row[6]
         } if row else None
         
         df = pd.DataFrame([json_data]) if json_data else pd.DataFrame()

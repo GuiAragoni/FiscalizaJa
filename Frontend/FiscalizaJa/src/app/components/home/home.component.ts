@@ -15,7 +15,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private scrollHandler = () => {
     const footer = document.getElementById('footer');
     if (!footer) return;
-
+ 
     const footerBottom = footer.getBoundingClientRect().bottom + window.scrollY;
     const maxScroll = footerBottom - window.innerHeight;
 
@@ -30,12 +30,5 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.scrollHandler);
-  }
-
-  chamarApi() {
-    debugger;
-    this.apiService.chamarEndpoint().subscribe(response => {
-        console.log('Resposta da API:', response);
-      });    
-  }
+  }  
 }
