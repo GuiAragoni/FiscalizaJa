@@ -13,12 +13,12 @@ export class CidadaoService {
   constructor(private http: HttpClient) { }
 
   registrarCidadao(dados: any): Observable<any> {      
-  return this.http.post(this.apiUrl + "registrar", dados);
+    return this.http.post(this.apiUrl + "registrar", dados);
   }
 
-  loginCidadao(dados: any): Observable<any> {      
-  return this.http.get(this.apiUrl + "cidadao" ,dados);
-  //return this.http.get(`this.apiUrl + "cidadao/" + ${dados}`, dados);
+  loginCidadao(dados: any): Observable<any> {   
+    debugger   
+    return this.http.get(`${this.apiUrl}cidadao/${dados}`);
   }
 }
 

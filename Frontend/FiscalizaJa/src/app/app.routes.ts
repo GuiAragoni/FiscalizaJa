@@ -13,5 +13,5 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },  
   { path: 'sobre-nos', component: SobreNosComponent },  
   { path: 'central-ajuda', component: CentralAjudaComponent },  
-  { path: 'politica-privacidade', component: PoliticaPrivacidadeComponent },  
+  { path: 'politica-privacidade', component: PoliticaPrivacidadeComponent },      
 ];
