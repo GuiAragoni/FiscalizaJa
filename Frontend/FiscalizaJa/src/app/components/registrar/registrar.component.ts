@@ -4,15 +4,14 @@ import { CommonModule }   from '@angular/common';
 import { FormsModule }    from '@angular/forms';
 import { CidadaoService } from '../../services/cidadao.service';
 import { Router } from '@angular/router';
-
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registrar',
   standalone: true,
   imports: [
-    CommonModule,       // para diretivas estruturais
-    FormsModule,        // para [(ngModel)]
+    CommonModule,       
+    FormsModule,        
     RouterModule
   ],
   templateUrl: './registrar.component.html',
@@ -20,25 +19,33 @@ import { Router } from '@angular/router';
 })
 
 
-export class RegistrarComponent implements OnInit, OnDestroy {
+// export class RegistrarComponent implements OnInit, OnDestroy {
 
-  nome = ''; email = ''; telefone = ''; cpf = ''; endereco = '';
+export class RegistrarComponent {
+  nome = '';
+  email = '';
+  senha = '';
+  confirmarSenha = '';
 
-  constructor(private svc: CidadaoService, private router: Router) {}
+  constructor(private cidadaoService: CidadaoService) {}
 
-  registrar() {
-    this.svc.criar({
+
+    registrarCidadao() {
+    if (this.senha !== this.confirmarSenha) {
+      alert('As senhas não coincidem!');
+      return;
+    }
+
+
+     const novoCidadao = {
       Nome: this.nome,
       Email: this.email,
-      Telefone: this.telefone,
-      CPF: this.cpf,
-      Endereco: this.endereco
-    }).subscribe({
-      next: () => {
-        alert('Registrado!');
-        this.router.navigate(['/login']);
-      },
-      error: e => alert('Erro: ' + e.error?.erro)
+      Senha: this.senha
+    };
+
+    this.cidadaoService.registrarCidadao(novoCidadao).subscribe({
+      next: () => alert('Usuário registrado com sucesso!'),
+      error: (err) => alert('Erro ao registrar: ' + err.error?.erro)
     });
   }
 
@@ -50,4 +57,4 @@ export class RegistrarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     document.body.style.overflow = 'auto';     // Restaura scroll ao sair
   }
-}
+  }
