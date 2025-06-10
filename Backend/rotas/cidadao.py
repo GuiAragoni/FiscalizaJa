@@ -35,11 +35,11 @@ def obter_cidadao_por_id(id):
     
     
 
-@cidadao_bp.route('/cidadao/<string:email>', methods=['GET'])
+@cidadao_bp.route('/cidadao/<string:cpfEmail>', methods=['GET'])
 @swag_from('../static/swagger.yml')
-def obter_cidadao_por_email(email):
+def obter_cidadao_por_email(cpfEmail):
     try:
-        df = cidadao_service.obter_por_email(email)
+        df = cidadao_service.obter_dados_login(cpfEmail)
         if df.empty:
             return jsonify({'mensagem': 'Cidadão não encontrado'}), 404
                 
@@ -48,6 +48,7 @@ def obter_cidadao_por_email(email):
         return jsonify({'erro': str(e)}), 500
     
 
+#region Registrar Cidadao
 @cidadao_bp.route('/registrar', methods=['POST'])
 @swag_from('../static/swagger.yml')
 def criar_cidadao():
@@ -57,7 +58,8 @@ def criar_cidadao():
         return jsonify({'mensagem': 'Cidadão criado com sucesso!'}), 201
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
-    
+#endregion
+
 
 @cidadao_bp.route('/cidadao/<int:id>', methods=['PUT'])
 @swag_from('../static/swagger.yml')

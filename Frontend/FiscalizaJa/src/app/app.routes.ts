@@ -20,4 +20,5 @@ export const routes: Routes = [
   { path: 'usuario-home', component: UsuarioHomeComponent },
   { path: 'secretaria-home', component: SecretariaHomeComponent },
   { path: 'politica-privacidade', component: PoliticaPrivacidadeComponent },  
+  { path: 'central-ajuda', component: CentralAjudaComponent }
 ];

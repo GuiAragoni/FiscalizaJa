@@ -9,6 +9,7 @@ import { SobreNosComponent } from './components/sobre-nos/sobre-nos.component';
 import { CentralAjudaComponent } from './components/central-ajuda/central-ajuda.component';
 import { PoliticaPrivacidadeComponent } from './components/politica-privacidade/politica-privacidade.component';
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, NavbarComponent, HomeComponent, RegistrarComponent,LoginComponent, SobreNosComponent, CentralAjudaComponent, PoliticaPrivacidadeComponent],

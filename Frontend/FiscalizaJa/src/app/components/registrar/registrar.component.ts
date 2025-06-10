@@ -18,29 +18,69 @@ import { HttpClient } from '@angular/common/http';
   styleUrls:   ['./registrar.component.scss']
 })
 
+export class RegistrarComponent implements OnInit, OnDestroy {
 
-// export class RegistrarComponent implements OnInit, OnDestroy {
-
-export class RegistrarComponent {
   nome = '';
   email = '';
   senha = '';
   confirmarSenha = '';
+  cpf = '';
+  telefone = '';
+  endereco = '';
 
-  constructor(private cidadaoService: CidadaoService) {}
+  estadoSelecionado = '';
+  cidadeSelecionada = '';
 
+  estados: any[] = [];
+  cidades: any[] = [];
 
-    registrarCidadao() {
+  constructor(
+    private cidadaoService: CidadaoService,
+    private http: HttpClient
+  ) {}
+
+  ngOnInit(): void {
+    document.body.style.overflow = 'hidden';
+
+    // Carrega os estados ao abrir a tela
+    this.http.get<any[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+      .subscribe(res => {
+        this.estados = res.sort((a, b) => a.nome.localeCompare(b.nome));
+      });
+  }
+
+  onEstadoChange() {
+    if (this.estadoSelecionado) {
+      this.http.get<any[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${this.estadoSelecionado}/municipios`)
+        .subscribe(res => {
+          this.cidades = res.sort((a, b) => a.nome.localeCompare(b.nome));
+        });
+    } else {
+      this.cidades = [];
+    }
+  }
+
+  registrarCidadao() {
+    debugger
+
+    if (this.estadoSelecionado == "" || this.cidadeSelecionada == "") {
+      alert('Selecionar um Estado e uma Cidade!');
+      return;
+    }
+
     if (this.senha !== this.confirmarSenha) {
       alert('As senhas não coincidem!');
       return;
     }
 
-
-     const novoCidadao = {
+    const novoCidadao = {
       Nome: this.nome,
       Email: this.email,
-      Senha: this.senha
+      Senha: this.senha,
+      Cpf: this.cpf,
+      Telefone: this.telefone,
+      Estado: this.estadoSelecionado,
+      Cidade: this.cidadeSelecionada
     };
 
     this.cidadaoService.registrarCidadao(novoCidadao).subscribe({
@@ -49,12 +89,7 @@ export class RegistrarComponent {
     });
   }
 
-
-  ngOnInit(): void {
-    document.body.style.overflow = 'hidden';   // Remove scroll    
-  }
-
   ngOnDestroy(): void {
-    document.body.style.overflow = 'auto';     // Restaura scroll ao sair
+    document.body.style.overflow = 'auto';
   }
-  }
+}

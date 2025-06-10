@@ -14,25 +14,26 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-email = '';
+cpfEmail = '';
 senha = '';  
 
 //constructor(private cidadaoService: CidadaoService) {}
 constructor(private cidadaoService: CidadaoService, private router: Router) {}
 
-mensagemErro: string = '';
-login() {debugger
-  this.cidadaoService.loginCidadao(this.email).subscribe({
+
+login() {
+  debugger
+  this.cidadaoService.loginCidadao(this.cpfEmail).subscribe({
     next: (cidadao) => {
       if (cidadao.Senha === this.senha) {
-        // login válido
-        this.router.navigate(['/home']);
+        alert('Login APROVADO');
+        //this.router.navigate(['/home']);
       } else {
-        this.mensagemErro = 'Senha incorreta.';
+        alert('Senha incorreta.');
       }
     },
-    error: (err) => {
-      this.mensagemErro = 'Usuário não encontrado.';
+    error: () => {
+      alert('Usuário não encontrado.');
     }
   });
 }

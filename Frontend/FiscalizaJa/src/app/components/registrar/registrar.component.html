@@ -1,15 +1,40 @@
-
 <div class="register-wrapper">
-  
-  <div class="register-card">       
-
-    <h2>Crie sua conta</h2>  
+  <div class="register-card">
+    <h2>Crie sua conta</h2>    
 
     <form class="form" (ngSubmit)="registrarCidadao()">
-      <input [(ngModel)] ="nome" name="nome" required type="text" placeholder="Nome completo" />      
-      <input [(ngModel)] ="email" name="email" type="email" placeholder="Email" />
-      <input [(ngModel)] ="senha" name="senha" type="password" placeholder="Senha" />
-      <input [(ngModel)] ="confirmarSenha" name="confirmarSenha" type="password" placeholder="Confirme a senha" />
+            
+      <div class="form-row">
+        <input [(ngModel)]="nome" name="nome" required type="text" placeholder="Nome completo" />
+        <input [(ngModel)]="email" name="email" required type="email" placeholder="Email" />
+      </div>
+      
+      <div class="form-row">
+        <input [(ngModel)]="cpf" name="cpf" required type="text" placeholder="CPF" />
+        <input [(ngModel)]="telefone" name="telefone" required type="text" placeholder="Telefone" />
+      </div>
+            
+      <select [(ngModel)]="estadoSelecionado" name="estado" (change)="onEstadoChange()" required>
+        <option value="">Selecione o estado</option>
+        <option *ngFor="let estado of estados" [value]="estado.sigla">
+          {{ estado.nome }}
+        </option>
+      </select>
+
+      <select [(ngModel)]="cidadeSelecionada" name="cidade" required>
+        <option value="">Selecione a cidade</option>
+        <option *ngFor="let cidade of cidades" [value]="cidade.nome">
+          {{ cidade.nome }}
+        </option>
+      </select>
+
+
+      <!-- Senhas -->
+      <div class="form-row">
+        <input [(ngModel)]="senha" name="senha" required type="password" placeholder="Senha" />
+        <input [(ngModel)]="confirmarSenha" name="confirmarSenha" required type="password" placeholder="Confirme a senha" />
+      </div>
+
       <button type="submit" class="submit-btn">Registrar</button>
     </form>
 
@@ -18,7 +43,8 @@
     <button class="social-btn">
       <img src="LogoGoogle.png" alt="Google" />
       Criar com Google
-    </button>    
+    </button>
+
     <p class="switch">
       Já tem uma conta?<a routerLink="/login"> Entrar aqui</a>
     </p>
