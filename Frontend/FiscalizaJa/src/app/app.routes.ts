@@ -5,6 +5,9 @@ import { LoginComponent } from './components/login/login.component';
 import { SobreNosComponent } from './components/sobre-nos/sobre-nos.component';
 import { CentralAjudaComponent } from './components/central-ajuda/central-ajuda.component';
 import { PoliticaPrivacidadeComponent } from './components/politica-privacidade/politica-privacidade.component';
+import { DescricaoOcorrenciaComponent } from './components/descricao-ocorrencia/descricao-ocorrencia.component';
+import { UsuarioHomeComponent } from './components/usuario-home/usuario-home.component';
+import { SecretariaHomeComponent } from './components/secretaria-home/secretaria-home.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -12,6 +15,9 @@ export const routes: Routes = [
   { path: 'registrar', component: RegistrarComponent },
   { path: 'login', component: LoginComponent },  
   { path: 'sobre-nos', component: SobreNosComponent },  
-  { path: 'central-ajuda', component: CentralAjudaComponent },  
+  { path: 'central-ajuda', component: CentralAjudaComponent },
+  { path: 'descricao-ocorrencia', component: DescricaoOcorrenciaComponent },
+  { path: 'usuario-home', component: UsuarioHomeComponent },
+  { path: 'secretaria-home', component: SecretariaHomeComponent },
   { path: 'politica-privacidade', component: PoliticaPrivacidadeComponent },  
 ];
