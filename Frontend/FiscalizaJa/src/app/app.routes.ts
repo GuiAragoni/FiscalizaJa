@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SobreNosComponent } from './components/sobre-nos/sobre-nos.component';
 import { CentralAjudaComponent } from './components/central-ajuda/central-ajuda.component';
 import { PoliticaPrivacidadeComponent } from './components/politica-privacidade/politica-privacidade.component';
+import { OcorrenciasComponent } from './components/ocorrencias/ocorrencias.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,4 +15,5 @@ export const routes: Routes = [
   { path: 'sobre-nos', component: SobreNosComponent },  
   { path: 'central-ajuda', component: CentralAjudaComponent },  
   { path: 'politica-privacidade', component: PoliticaPrivacidadeComponent },      
+  { path: 'ocorrencias', component: OcorrenciasComponent },      
 ];

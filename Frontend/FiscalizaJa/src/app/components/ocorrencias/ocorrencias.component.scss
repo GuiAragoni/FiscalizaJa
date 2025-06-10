@@ -1,0 +1,118 @@
+
+.tela-ocorrencias {
+  margin-top: 1px;
+  width: 100vw;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  font-family: "Space Grotesk";
+}
+
+.titulo-ocorrencias {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #0c0c0c;
+}
+
+.filtros-ocorrencias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;    
+
+  .input-busca-ocorrencias {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  .select-ocorrencias {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  .botao-nova-ocorrencia {
+    background-color: #0c6478;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+}
+
+.tabela-ocorrencias {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+
+  thead th,
+  tbody td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+  }
+
+  // Alinhamento por COLUNA (posição) – dinâmico
+  thead th:nth-child(1),
+  tbody td:nth-child(1) {
+    text-align: left; // Título da Ocorrência
+  }
+
+  thead th:nth-child(2),
+  tbody td:nth-child(2) {
+    text-align: left; // Localização
+  }
+
+  thead th:nth-child(3),
+  tbody td:nth-child(3) {
+    text-align: center; // Data
+  }
+
+  thead th:nth-child(4),
+  tbody td:nth-child(4) {
+    text-align: center; // Status
+  }
+
+  thead th:nth-child(5),
+  tbody td:nth-child(5) {
+    text-align: center; // Detalhes (ícone)
+  }
+
+  tr:nth-child(even) {
+    background-color: #e7e7e7;
+  }
+
+  .tag {
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    display: inline-block;
+
+    &.status-analise {
+      background-color: #7e869e;
+      width: 65px;
+    }
+
+    &.status-pendente {
+      background-color: #f4b740;
+      width: 65px;
+    }
+
+    &.status-resolvida {
+      background-color: #3ac65c;
+      width: 65px;
+    }
+  }
+
+  .icone-info {
+    font-size: 24px;
+    cursor: pointer;
+  }
+}

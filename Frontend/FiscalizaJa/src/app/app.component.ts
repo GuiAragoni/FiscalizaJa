@@ -8,11 +8,12 @@ import { Router, NavigationEnd } from '@angular/router';
 import { SobreNosComponent } from './components/sobre-nos/sobre-nos.component';
 import { CentralAjudaComponent } from './components/central-ajuda/central-ajuda.component';
 import { PoliticaPrivacidadeComponent } from './components/politica-privacidade/politica-privacidade.component';
+import { OcorrenciasComponent } from './components/ocorrencias/ocorrencias.component';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, HomeComponent, RegistrarComponent,LoginComponent, SobreNosComponent, CentralAjudaComponent, PoliticaPrivacidadeComponent],
+  imports: [RouterOutlet, NavbarComponent, HomeComponent, RegistrarComponent,LoginComponent, SobreNosComponent, CentralAjudaComponent, PoliticaPrivacidadeComponent, OcorrenciasComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
